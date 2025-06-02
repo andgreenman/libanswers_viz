@@ -296,12 +296,54 @@ def _(
 
 
 @app.cell
-def _(filtered_df, mo):
+def _(mo):
+    # creating a UI element - show/hide table
+
+    table_switch = mo.ui.switch()
+
+    # UI element to switch between anonymous and credited dfs
+    librarian_switch = mo.ui.switch()
+    return librarian_switch, table_switch
+
+
+@app.cell
+def _(filtered_df, librarian_switch, mo):
+    #
     display_df = filtered_df.drop(
         columns=["Date_time", "Id", "yearweek", "hour", "Date"]
     )
 
-    mo.ui.table(display_df, page_size=15)
+    anonymous_df = filtered_df.drop(
+        columns=[
+            "Date_time",
+            "Id",
+            "yearweek",
+            "hour",
+            "Date",
+            "Entered By",
+            "Email Address",
+        ]
+    )
+
+    table = mo.ui.table(display_df if librarian_switch.value else anonymous_df)
+    return (table,)
+
+
+@app.cell
+def _(librarian_switch, mo, table, table_switch):
+    mo.vstack(
+        [
+            mo.md("Toggle to display the transactions in a table."),
+            table_switch,
+            mo.md("Toggle to show user information."),
+            librarian_switch,
+            *(
+                [table]
+                if table_switch.value
+                else ["Not displaying transaction table."]
+            ),
+        ]
+    )
     return
 
 
