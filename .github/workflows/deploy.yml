@@ -1,0 +1,22 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]  # Change to your default branch if not 'main'
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for pushing to gh-pages branch
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: app  # Directory containing your WASM files
+          branch: gh-pages  # The branch GitHub Pages will deploy from
+          clean: true  # Removes files in the branch that aren't in your folder
