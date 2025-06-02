@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]  # Change to your default branch if not 'main'
+    branches: [main]
+    paths:
+      - 'app/**'  # Only trigger when files in app directory change
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
