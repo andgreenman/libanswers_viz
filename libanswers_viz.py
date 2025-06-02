@@ -25,7 +25,7 @@ def _(mo):
         r"""
     # LibAnswers Analytics Visualizer
 
-    This Marimo notebook run as a webapp automatically adjusts heatmaps, READ level comparison charts, and more based on an uploaded LibAnswers analytics CSV file. Filters in LibAnswers analytics are replicated here, with the additional funcationality of filtering by a range of READ levels. Additionally, the smallest unit of time is a week, not a month.
+    This Marimo notebook run as a webapp automatically adjusts heatmaps, READ level comparison charts, and more based on an uploaded LibAnswers analytics CSV file. Filters in LibAnswers analytics are replicated here, with the additional functionality of filtering by a range of READ levels. Additionally, the smallest unit of time used for analyses is a week, not a month.
     """
     )
     return
